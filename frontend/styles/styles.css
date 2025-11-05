@@ -13,7 +13,7 @@ body {
 }
 
 /* Header/navigation area */
-#header-area {
+#header-nav-area {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -22,8 +22,22 @@ body {
     background-color: whitesmoke;
 }
 
-#header-area p {
+#header-nav-area p {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    
     color: black;
+    font-size: larger;
+}
+
+#tabs-nav-bar {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+
+    color: black;
+    font-size: larger;
 }
 
 /* Hero area */
