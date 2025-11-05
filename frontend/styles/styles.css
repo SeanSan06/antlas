@@ -1,0 +1,78 @@
+/* HTML and Body area */
+html {
+    height: 100%;
+
+    background-color: black;
+}
+
+body {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    margin: 0px;
+
+    background-color: lightgray;
+}
+
+/* Header/navigation area */
+#header-nav-area {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+
+    background-color: rgb(37, 87, 153);
+    border: 1;
+    box-shadow: 0 4px 8px rgba(37, 87, 153, 0.75);
+}
+
+#header-nav-area p {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    margin: 8px;
+
+    color: rgb(255, 255, 255);
+    font-size: 32px;
+}
+
+#tabs-nav-bar {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    margin: 8px;
+
+    color: black;
+    font-size: 32px;
+}
+
+#tabs-nav-bar #home a {
+    text-decoration: underline;
+    color: white;
+}
+
+#tabs-nav-bar #events a {
+    text-decoration: none;
+    color: white;
+}
+
+#tabs-nav-bar #about a {
+    text-decoration: none;
+    color: white;
+}
+
+/* Hero area */
+h1{
+    font-size: 70px;
+    color: white
+}
+
+/* Main content area(where events show up) */
+    /* Buttons sub-area(social/fun, educational, fitness, general) */
+    p {
+        color: white;
+    }
+
+    /* Events sub-area */
+
+/* Footer area */
