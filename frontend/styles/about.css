@@ -46,8 +46,19 @@ body {
     font-size: 32px;
 }
 
-#tabs-nav-bar #about {
+#tabs-nav-bar #home a {
+    text-decoration: none;
+    color: white;
+}
+
+#tabs-nav-bar #events a {
+    text-decoration: none;
+    color: white;
+}
+
+#tabs-nav-bar #about a {
     text-decoration: underline;
+    color: white;
 }
 
 /* Hero area */
