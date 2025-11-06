@@ -2,18 +2,22 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import List
+from database import get_connection, create_tables
 
 app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
+create_tables()
+
 class Event(BaseModel):
-    id:  int
+    id:  int | None = None
     name: str
     host: str
     time: str #ISO datetime
@@ -24,6 +28,18 @@ events_db = []
 
 # Adds 1 event to events_db
 @app.post("/events", response_model=Event)
+def create_event(new_event: Event):
+    connection = get_connection()
+    cursor = connection.cursor()
+    cursor.execute(
+        "INSERT INTO events (name, host, time, location) VALUES (?, ?, ?, ?)",
+        (event.name, event.host, event.time, event.location),
+    )
+    connection.commit()
+    event.id = cursor.lastrowid
+    connection.close()
+    return event
+
 def create_event(new_event: Event):
     for event_index in events_db:
         if event_index.id == new_event.id:
