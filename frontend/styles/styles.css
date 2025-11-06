@@ -81,6 +81,11 @@ body {
         }
     }
 
+    @media (max-width: 480px) {
+        #tabs-nav-bar p {
+            font-size: 1.2rem;
+        }
+    }
 /* Hero area */
 #hero-area {
     display: flex;
@@ -97,6 +102,13 @@ body {
     background-size: cover; 
     background-position: center;
 }
+
+ @media (max-width: 480px) {
+    #hero-area {
+        gap: 5vh;
+        padding: 1rem
+    }
+ }
 
 #antlas-title {
     display: flex;
@@ -140,7 +152,7 @@ body {
     #antlas-title span:nth-child(6) {animation-delay: 0.90s; }
 
     @media (max-width: 480px) {
-        #antlast-title {
+        #antlas-title {
             font-size: clamp(2rem, 12vw, 5rem);
         }
     }
@@ -178,9 +190,11 @@ body {
     /* Buttons sub-area(social/fun, educational, fitness, general) */
     #button-sub-area {
         display: flex;
-        flex-direction: row;
-        justify-content: space-around;
+        flex-wrap: wrap;
+        justify-content: center;
         width: 60%;
+        max-width: 600px;
+        margin: 2rem auto 0 auto;
         border-radius: 32px;
         margin-top: 48px;
         
