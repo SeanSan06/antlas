@@ -4,11 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Antlas</title>
-    <link rel = "stylesheet" href = "../styles/styles.css">
 
-    <link href = "https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel = stylesheet>
+    <!-- Custom Font -->
+    <link href = "https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+
+    <link rel = "stylesheet" href="../styles/styles.css">
+    <link rel="stylesheet" href="../styles/openstreetmap.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
+
 </head>
-<body style>
+<body>
     <!-- Header/navigation area -->
     <div id="header-nav-area">
         <div id="antlas-nav-bar">
@@ -26,9 +31,9 @@
         <div id="title-area">
             <h1 id="antlas-title"><span>A</span><span>n</span><span>t</span><span>l</span><span>a</span><span>s</span></h1>
         </div>
-        <div id="create-event-button-area">
+        <!-- <div id="create-event-button-area">
             <button>Create event</button>
-        </div>
+        </div> -->
     </div>
 
     <!-- Main content area(where events show up) -->
@@ -36,17 +41,19 @@
         <div id="main-content-area">
             <!-- Buttons sub-area -->
             <div id="button-sub-area">
-                <button>Social/Fun </button>
-                <button>Educational</button>
-                <button>Fitness</button>
-                <button>General</button>
+                <button>Create Event</button>
+                <button>Cancel Event</button>
+                <button>Join Event</button>
+                <button>Leave Event</button>
             </div>
 
-            <!-- Events sub-area -->
-            <div>
-
-            </div>
+            <!-- Events sub-area, for the map -->
+            <div id="open-street-map"></div>
         </div>
+
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="../js/map.js"></script>
     
     <!-- Footer area -->
 </body>

@@ -3,7 +3,7 @@ import sqlite3
 # Creates a new events.db, if it already exists the connect to it
 def get_connection():
     connection = sqlite3.connect("events.db")
-    connection.row_event_attributes = sqlite3.Row
+    connection.row_factory = sqlite3.Row
     return connection
 
 
@@ -19,7 +19,7 @@ def create_tables():
 
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS events (
-            id EVENTS PRIMARY KEY AUTOINCREMENT,     
+            id INTEGER PRIMARY KEY AUTOINCREMENT,     
             name TEXT NOT NULL,
             host TEXT NOT NULL,
             time TEXT NOT NULL,
