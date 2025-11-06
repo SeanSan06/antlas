@@ -1,0 +1,21 @@
+#open-street-map {
+        height: 400px;
+        width: 80%;
+        border-radius: 10px;
+}
+
+@media (max-width: 600px) {
+  #open-street-map {
+    width: 90%;
+    height: 300px;
+  }
+}
+
+
+.leaflet-container img {
+  max-width: none !important;
+  max-height: none !important;
+  width: auto !important;
+  height: auto !important;
+  box-shadow: none;
+}
