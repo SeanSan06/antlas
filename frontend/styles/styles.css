@@ -64,8 +64,9 @@ body {
 /* Hero area */
 #hero-area {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
 }
 
 #antlas-title {
@@ -76,6 +77,25 @@ body {
 
     font-size: 150px;
     color: rgba(254, 204, 7);
+}
+
+#create-event-button {
+    
+}
+
+#create-event-button-area button {
+    font-size: 72px;
+    margin: 8px;
+
+    background-color: rgb(63, 165, 53);
+    border: none;
+    border-radius: 8px;
+
+    transition: background-color 0.3s ease; 
+}
+
+#create-event-button-area button:hover {
+    background-color: rgb(122, 184, 0);
 }
 
 /* Main content area(where events show up) */
@@ -104,6 +124,12 @@ body {
         background-color: rgb(37, 87, 153);
         border: none;
         border-radius: 8px;
+
+        transition: background-color 0.3s ease; 
+    }
+
+    #button-sub-area button:hover {
+        background-color: rgb(0, 131, 190);
     }
 
     /* Events sub-area */
