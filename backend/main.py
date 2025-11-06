@@ -35,3 +35,12 @@ def join_event(event_id: int, attendee: str):
                 event.attendees.append(attendee)
             return event
     raise HTTPException(status_code=404, detail="Event not found")
+
+@app.post("/events/{event_id}/leave")
+def leave_event(event_id: int, attendee: str):
+    for event in events_db:
+        if event.id == event_id:
+            if attendee in event.attendees:
+                event.attendees.remove(attendee)
+            return event
+    raise HTTPException(status_code=404, detail="Event not found")
