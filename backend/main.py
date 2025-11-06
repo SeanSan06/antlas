@@ -12,10 +12,11 @@ class Event(BaseModel):
     location: str
     attendees: List[str] = []
 
-events_db = [2,3]
+events_db = []
 
+# Adds 1 event to events_db
 @app.post("/events", response_model=Event)
-def create_item(new_event: Event):
+def create_event(new_event: Event):
     for event_index in events_db:
         if event_index.id == new_event.id:
             raise HTTPException(status_code=400, detail="Event with this ID already exists")
@@ -23,10 +24,25 @@ def create_item(new_event: Event):
 
     return new_event
 
+# Remove 1 event to events_db
+@app.post("/events{event_id}")
+def remove_event(host: str, event_id:int):
+    for i, event in enumerate(events_db):
+        if event.id == event_id:
+            if event.host == host:
+                del events_db[i]
+            else:
+                raise HTTPException(status_code=403, detail = "Must be host to cancel")
+            return {"message": "Event canceled"}
+    raise HTTPSException(status_code=404, detail = "Event not found")
+
+
+# Returns all events in events_db
 @app.get("/events", response_model=List[Event])
 def get_all_events():
     return events_db
 
+# Add an attendee to specific event in events_db
 @app.post("/events/{event_id}/join")
 def join_event(event_id: int, attendee: str):
     for event in events_db:
@@ -36,6 +52,7 @@ def join_event(event_id: int, attendee: str):
             return event
     raise HTTPException(status_code=404, detail="Event not found")
 
+# Removes an attendee from specific event in events_db
 @app.post("/events/{event_id}/leave")
 def leave_event(event_id: int, attendee: str):
     for event in events_db:
@@ -44,3 +61,4 @@ def leave_event(event_id: int, attendee: str):
                 event.attendees.remove(attendee)
             return event
     raise HTTPException(status_code=404, detail="Event not found")
+
