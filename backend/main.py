@@ -12,19 +12,19 @@ class Event(BaseModel):
     location: str
     attendees: List[str] = []
 
-events_db = []
+events_db = [2,3]
 
 @app.post("/events", response_model=Event)
-def create_item(event: Event):
-    for e in events_db:
-        if e.id == event.id:
+def create_item(new_event: Event):
+    for event_index in events_db:
+        if event_index.id == new_event.id:
             raise HTTPException(status_code=400, detail="Event with this ID already exists")
-    events_db.append(event)
+    events_db.append(new_event)
 
-    return event
+    return new_event
 
 @app.get("/events", response_model=List[Event])
-def get_events():
+def get_all_events():
     return events_db
 
 @app.post("/events/{event_id}/join")
