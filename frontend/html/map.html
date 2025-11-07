@@ -1,83 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Antlas</title>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      transition: background-color 0.3s ease;
-      overflow-x: hidden;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Antlas</title>
+    <link href = "https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
+    <link rel = "stylesheet" href = "/static/styles/navbar.css">
 
-    .overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 100%;
-      width: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.3s ease;
-      z-index: 10000;
-    }
 
-    .side-popup {
-      position: fixed;
-      top: 0;
-      right: -400px; /* initially hidden off-screen */
-      width: 300px;
-      height: 100%;
-      background: #fff;
-      box-shadow: -4px 0 10px rgba(0, 0, 0, 0.3);
-      padding: 20px;
-      transition: right 0.3s ease;
-      z-index: 10001;
-    }
+    <style>
+        html {
+            font-family: "Poppins", sans-serif;
+        }
 
-    .overlay.active {
-      opacity: 1;
-      visibility: visible;
-    }
+        body {
+            margin: 0;
+            font-family: "Poppins", sans-serif;
+            transition: background-color 0.3s ease;
+            overflow-x: hidden;
+        }
 
-    .side-popup.active {
-      right: 0;
-    }
+        
 
-    .content {
-      padding: 50px;
-      text-align: center;
-    }
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease;
+            z-index: 10000;
+        }
 
-    h1 {
-      margin-bottom: 20px;
-    }
-  </style>
+        .side-popup {
+            position: fixed;
+            top: 0;
+            right: -400px; /* initially hidden off-screen */
+            width: 300px;
+            height: 100%;
+            background: #fff;
+            box-shadow: -4px 0 10px rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            transition: right 0.3s ease;
+            z-index: 10001;
+        }
+
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .side-popup.active {
+          right: 0;
+        }
+
+        .content {
+          padding: 50px;
+          text-align: center;
+        }
+
+        h1 {
+          margin-bottom: 20px;
+        }
+    </style>
 </head>
 <body>
-  <div id="map" style="width: 100%; height: 100%; position: absolute; margin: 0px; padding: 0px;"></div>
-  <div id="overlay"></div>
-  <div id="event-info" class="side-popup"></div>
-  <div id="event-form-container" class="side-popup">
-    <h2>Side Popup</h2>
-    <div>
-        <form id="event-form">
-          <input id="event-name" name="name" type="text" placeholder="Enter your event name here">
-          <input id="host-name" name="host" type="text" placeholder="Enter your name here">
-          <input id="event-time" name="time" type="text" placeholder="Enter the time of the event">
-          <input id="event-location" name="location" type="hidden">
-          <input type="submit">
-        </form>
-        <button id="event-form-cancel">✖</button>
+      <!-- Header/navigation area -->
+    <div id="header-nav-area">
+        <div id="antlas-nav-bar">
+            <p>Antlas</p>
+        </div>
+        <div id="tabs-nav-bar">
+            <p id="home"><a href="/">Home</a></p>
+            <p id="events"><a href="/map">Events</a></p>
+            <p id="about"><a href="/about">About</a></p>
+        </div>
     </div>
-  </div>
-  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+    <!-- Map area -->
+    <div id="map" style="width: 100%; height: 100%; position: absolute; margin: 0px; padding: 0px;"></div>
+    <div id="overlay"></div>
+    <div id="event-info" class="side-popup"></div>
+    <div id="event-form-container" class="side-popup">
+        <h2>Side Popup</h2>
+        <div>
+            <form id="event-form">
+                <input id="event-name" name="name" type="text" placeholder="Enter your event name here">
+                <input id="host-name" name="host" type="text" placeholder="Enter your name here">
+                <input id="event-time" name="time" type="text" placeholder="Enter the time of the event">
+                <input id="event-location" name="location" type="hidden">
+                <input type="submit">
+            </form>
+
+            <button id="event-form-cancel">✖</button>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="/static/js/index.js"></script>
     <script src="/static/js/map.js"></script>
-  
 </body>
 </html>

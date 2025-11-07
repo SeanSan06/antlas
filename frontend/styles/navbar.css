@@ -1,0 +1,72 @@
+/* Header/navigation area */
+#header-nav-area {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    min-height: 80px;
+
+    background-color: rgb(37, 87, 153);
+    border: 1;
+    box-shadow: 0 4px 8px rgba(37, 87, 153, 0.75);
+}
+
+#header-nav-area p {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    margin: 8px;
+
+    color: rgb(255, 255, 255);
+    font-size: 32px;
+    font-family: "Poppins", sans-serif;
+}
+
+#tabs-nav-bar {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    margin: 8px;
+
+    color: black;
+    font-size: 32px;
+    font-family: "Poppins", sans-serif;
+}
+
+#tabs-nav-bar #home a {
+    text-decoration: underline;
+    color: white;
+}
+
+#tabs-nav-bar #events a {
+    text-decoration: none;
+    color: white;
+}
+
+#tabs-nav-bar #about a {
+    text-decoration: none;
+    color: white;
+}
+
+    @media (max-width: 750px) {
+        #header-nav-area {
+            flex-direction: column;
+            gap: 1rem;
+            padding: 1rem;
+        }
+
+        #tabs-nav-bar {
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        #tabs-nav-bar p {
+            font-size: 1.5rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        #tabs-nav-bar p {
+            font-size: 1.2rem;
+        }
+    }
