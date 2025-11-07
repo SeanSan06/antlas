@@ -23,7 +23,7 @@
       opacity: 0;
       visibility: hidden;
       transition: opacity 0.3s ease;
-      z-index: 10;
+      z-index: 10000;
     }
 
     .side-popup {
@@ -36,7 +36,7 @@
       box-shadow: -4px 0 10px rgba(0, 0, 0, 0.3);
       padding: 20px;
       transition: right 0.3s ease;
-      z-index: 20;
+      z-index: 10001;
     }
 
     .overlay.active {
@@ -59,12 +59,22 @@
   </style>
 </head>
 <body>
-  <div id="overlay"></div>
-  <div id="event-info"></div>
-  <div id="event-form">
-    <h2>Side Popup</h2>
-  </div>
   <div id="map" style="width: 100%; height: 100%; position: absolute; margin: 0px; padding: 0px;"></div>
+  <div id="overlay"></div>
+  <div id="event-info" class="side-popup"></div>
+  <div id="event-form-container" class="side-popup">
+    <h2>Side Popup</h2>
+    <div>
+        <form id="event-form">
+          <input id="event-name" name="name" type="text" placeholder="Enter your event name here">
+          <input id="host-name" name="host" type="text" placeholder="Enter your name here">
+          <input id="event-time" name="time" type="text" placeholder="Enter the time of the event">
+          <input id="event-location" name="location" type="hidden">
+          <input type="submit">
+        </form>
+        <button id="event-form-cancel">✖</button>
+    </div>
+  </div>
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script src="../js/map.js"></script>
 </body>

@@ -1,7 +1,7 @@
 function initializeMap() {
   const NE = L.latLng(33.651154, -117.834919);
   const SW = L.latLng(33.641249, -117.850411);
-  const bounds = L.latLngBounds(NE, SW);
+  const bounds = L.latLngBounds(SW, NE);
   const map = L.map('map', {
     center: [33.645805, -117.842772],
     zoom: 18,
@@ -23,6 +23,7 @@ function initializeMap() {
 }
 
 async function fetchAllEvents() {
+  console.log('starting event log...');
   const res = await fetch('http://localhost:8000/events');
   const events = await res.json();
   console.log(events);
@@ -42,6 +43,10 @@ function showEventInfo(event) {
   overlay.classList.add('active');
   eventInfo.classList.add('active');
   eventInfo.innerHTML = `
+  <button id="close-info">✖</button>
+  <h2>${event.name}</h2>
+  <p><b>Host:</b> ${event.host}</p>
+  <p><b>Time:</b> ${event.time}</p>
   `;
   document.querySelector('#close-info').addEventListener('click', hideEventInfo);
 }
@@ -55,14 +60,15 @@ function hideEventInfo() {
 
 function showEventSubmit(coords) {
   const overlay = document.querySelector('#overlay');
-  const eventForm = document.querySelector('#event-form');
+  const eventForm = document.querySelector('#event-form-container');
   overlay.classList.add('active');
   eventForm.classList.add('active');
+  document.querySelector('#event-location').value = JSON.stringify(coords);
 }
 
 function hideEventSubmit() {
   const overlay = document.querySelector('#overlay');
-  const eventForm = document.querySelector('#event-form');
+  const eventForm = document.querySelector('#event-form-container');
   overlay.classList.remove('active');
   eventForm.classList.remove('active');
 }
@@ -70,13 +76,13 @@ function hideEventSubmit() {
 document.addEventListener('DOMContentLoaded', async function() {
   // initialize map
   const map = initializeMap();
-  const allEvents = fetchAllEvents();
+  const allEvents = await fetchAllEvents();
 
   // parse events into objects
   allEvents.forEach(event => {
-    let marker = L.marker(JSON.parse(event.coords));
+    let marker = L.marker(JSON.parse(event.location));
     marker.on('click', (e) => {
-      showEventInfo(event.id);
+      showEventInfo(event);
     });
     marker.addTo(map);
     console.log(`Event ${event.id} loaded!`);
@@ -100,19 +106,22 @@ document.addEventListener('DOMContentLoaded', async function() {
       body: JSON.stringify(data)
     });
     const event = await res.json();
+    if (marker) {
+      marker.on('click', (e) => {
+        showEventInfo(event);
+      });
+    }
     hideEventSubmit();
     console.log(`Event ${event.id} created!`);
   });
 
   document.querySelector('#event-form-cancel').addEventListener('click', (e) => {
-    if (marker)
-    {
+    e.preventDefault();
+    if (marker) {
       map.removeLayer(marker);
+      marker = null;
     }
+    hideEventSubmit();
     console.log('event creation cancelled');
-  });
-
-  document.querySelector('#event-info-close').addEventListener('click', (e) => {
-    hideEventInfo();
   });
 });

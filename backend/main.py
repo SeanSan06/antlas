@@ -10,24 +10,21 @@ from database import create_tables, get_connection
 app = FastAPI()
 create_tables()
 
-# Set up CORS for the backend server
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["*"],  # Or specify e.g. ["http://localhost:5500"]
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# Event class object, inherit from BaseModl for pydantic type checking/conversion
+# Event class object, inherit from BaseModel for pydantic type checking/conversion
 class Event(BaseModel):
     id:  int | None = None
     name: str
     host: str
-    time: str #ISO datetime
+    time: str
     location: str
-
-events_db = []
 
 """ Communicates with the SQLite database """
 # Adds an event to the SQLite database, attributes must be passed in
