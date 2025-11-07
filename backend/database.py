@@ -23,17 +23,8 @@ def create_tables():
             name TEXT NOT NULL,
             host TEXT NOT NULL,
             time TEXT NOT NULL,
-            location TEXT NOT NULL     
+            location TEXT NOT NULL
         )          
-    """)
-    
-    cursor.execute("""
-        CREATE TABLE IF NOT EXISTS attendees (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            event_id INTEGER NOT NULL,
-            name TEXT NOT NULL,
-            FOREIGN KEY (event_id) REFERENCES events (id)
-        ) 
     """)
     
     connection.commit()

@@ -14,10 +14,10 @@ createEventButton.addEventListener("click", () => {
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
-            event_name: eventName,
-            host_name: hostName,
-            event_time: eventTime,
-            event_location: eventLocation
+            name: eventName,
+            host: hostName,
+            time: eventTime,
+            location: eventLocation
         })
     })
     .then(response => response.json())

@@ -1,6 +1,9 @@
 from fastapi import FastAPI, HTTPException
+from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
+from pathlib import Path
 from typing import List
 from database import create_tables, get_connection
 
@@ -23,10 +26,10 @@ class Event(BaseModel):
     host: str
     time: str #ISO datetime
     location: str
-    attendees: List[str] = []
 
 events_db = []
 
+""" Communicates with the SQLite database """
 # Adds an event to the SQLite database, attributes must be passed in
 @app.post("/events", response_model=Event)
 def create_event(new_event: Event):
@@ -42,46 +45,62 @@ def create_event(new_event: Event):
 
     return new_event
 
-# Remove an event from events_db
-@app.post("/events{event_id}")
-def remove_event(host: str, event_id:int):
-    for i, event in enumerate(events_db):
-        if event.id == event_id:
-            if event.host == host:
-                del events_db[i]
-            else:
-                raise HTTPException(status_code=403, detail = "Must be host to cancel")
-            return {"message": "Event canceled"}
-        
-    raise HTTPSException(status_code=404, detail = "Event not found")
+# Return an event given a specific ID #
+@app.get("/events/{event_id}", response_model=Event)
+def get_specific_event(event_id: int):
+    connection = get_connection()
+    cursor = connection.cursor()
+    cursor.execute("SELECT * FROM events WHERE id = ?", (event_id,))
+    row = cursor.fetchone()
+    connection.close()
 
+    if row is None:
+        raise HTTPException(status_code=404, detail = "Event not found")
+
+    return {
+        "id": row[0],
+        "name": row[1],
+        "host": row[2],
+        "time": row[3],
+        "location": row[4]
+    }
 
 # Returns all events in events_db
 @app.get("/events", response_model=List[Event])
 def get_all_events():
-    return events_db
+    connection = get_connection()
+    cursor = connection.cursor()
+    cursor.execute("SELECT * FROM events")
+    rows = cursor.fetchall()
+    connection.close()
 
-# Add an attendee to specific event in events_db
-@app.post("/events/{event_id}/join")
-def join_event(event_id: int, attendee: str):
-    for event in events_db:
-        if event.id == event_id:
-            if attendee not in event.attendees:
-                event.attendees.append(attendee)
+    all_events = []
+    for row in rows:
+        all_events.append({
+            "id": row[0],
+            "name": row[1],
+            "host": row[2],
+            "time": row[3],
+            "location": row[4]
+        })
 
-            return event
-        
-    raise HTTPException(status_code=404, detail="Event not found")
+    return all_events
 
-# Removes an attendee from specific event in events_db
-@app.post("/events/{event_id}/leave")
-def leave_event(event_id: int, attendee: str):
-    for event in events_db:
-        if event.id == event_id:
-            if attendee in event.attendees:
-                event.attendees.remove(attendee)
+""" Serves up each page on the website to the user as needed """
+BASE_DIR = Path(__file__).resolve().parent
+ROOT_DIR = BASE_DIR.parent
 
-            return event
-        
-    raise HTTPException(status_code=404, detail="Event not found")
+app.mount("/static", StaticFiles(directory=ROOT_DIR / "frontend"), name="static")
+
+@app.get("/")
+def serve_home():
+    return FileResponse(ROOT_DIR / "frontend" / "html" / "index.html")
+
+@app.get("/about")
+def serve_about():
+    return FileResponse(ROOT_DIR / "frontend" / "html" / "about.html")
+
+@app.get("/map")
+def serve_map():
+    return FileResponse(ROOT_DIR / "frontend" / "html" / "map.html")
 
