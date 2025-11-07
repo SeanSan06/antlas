@@ -46,11 +46,13 @@
             left: 0;
             height: 100%;
             width: 100%;
-            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            pointer-events: none;
+
+            background: rgba(0, 0, 0, 0.422);
             opacity: 0;
             visibility: hidden;
-            transition: opacity 0.3s ease;
-            z-index: 10000;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
         }
 
         .side-popup {
@@ -61,29 +63,31 @@
             right: -100%;
             width: 12vw;
             height: 100%;
+            z-index: 1001;
+
             background: rgb(0, 131, 190);
             box-shadow: -4px 0 10px rgba(0, 0, 0, 0.3);
             padding: 20px;
             transition: right 0.3s ease;
-            z-index: 10001;
         }
 
         .overlay.active {
             opacity: 1;
             visibility: visible;
+            pointer-events: auto;
         }
 
         .side-popup.active {
-          right: 0;
+            right: 0;
         }
 
         .content {
-          padding: 50px;
-          text-align: center;
+            padding: 50px;
+            text-align: center;
         }
 
         h1 {
-          margin-bottom: 20px;
+            margin-bottom: 20px;
         }
 
         #sumbit-button {
@@ -148,7 +152,7 @@
 
     <!-- Map area -->
     <div id="map" style="width: 100%; height: 90%; position: absolute; margin: 0px; padding: 0px;"></div>
-    <div id="overlay"></div>
+    <div id="overlay" class="overlay"></div>
     <div id="event-info" class="side-popup"></div>
     <div id="event-form-container" class="side-popup">
         <h2>Create Event!</h2>
