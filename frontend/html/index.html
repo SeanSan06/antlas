@@ -37,19 +37,29 @@
     </div>
 
     <!-- Main content area(where events show up) -->
-        <!-- Note: Add options to create event-->
-        <div id="main-content-area">
-            <!-- Buttons sub-area -->
-            <div id="button-sub-area">
-                <button>Create Event</button>
-                <button>Cancel Event</button>
-                <button>Join Event</button>
-                <button>Leave Event</button>
-            </div>
-
-            <!-- Events sub-area, for the map -->
-            <div id="open-street-map"></div>
+    <div id="main-content-area">
+        <!-- Buttons sub-area -->
+        <div id="button-sub-area">
+            <button>Create Event</button>
+            <button>Cancel Event</button>
+            <button>Join Event</button>
+            <button>Leave Event</button>
         </div>
+
+        <!-- Events sub-area, for the map -->
+        <div id="open-street-map"></div>
+    </div>
+
+    <!-- Input box area -->
+    <div id="input-box-area">
+        <div>
+            <textarea>Name</textarea>
+            <textarea>Host</textarea>
+            <textarea>Time</textarea>
+            <textarea>Location</textarea>
+            <button>Create Event</button>
+        </div>
+    </div>
 
 
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
