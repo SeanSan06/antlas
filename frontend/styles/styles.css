@@ -20,14 +20,14 @@ body {
 #hero-area {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: space-around;
     align-items: center;
     /* gap: 10vh; */
     padding: 2rem;
     text-align: center;
-    min-height: 60vh;
+    min-height: 90vh;
 
-    background: linear-gradient(to bottom, rgba(0,0,0,0) 70%, rgb(255, 255, 255)), url("../images/aldrich-park-3.jpg") center/cover no-repeat;
+    background: linear-gradient(to bottom, rgba(0,0,0,0) 70%, rgb(255, 255, 255)), url("../images/aldrich-park-2.jpg") center/cover no-repeat;
     background-repeat: no-repeat; 
     background-size: cover; 
     background-position: center;
