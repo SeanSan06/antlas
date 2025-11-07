@@ -39,16 +39,17 @@ body {
     margin: 16px;
 
     font-size: 128px;
-    color: black;
+    color: rgb(254, 204, 7);
 }
 
 #goal-paragraph {
     display: flex;
     flex-direction: row;
     justify-content: center;
+    width: 60%;
     margin: 16px;
     text-align: center;
 
     font-size: 32px;
-    color: black;
+    color: rgb(37, 87, 153);
 }

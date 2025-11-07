@@ -12,7 +12,7 @@ create_tables()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Or specify e.g. ["http://localhost:5500"]
+    allow_origins=["*"],  # Or specify e.g. ["http://localhost:5500"] or also 8000.
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -27,7 +27,7 @@ class Event(BaseModel):
     location: str
 
 """ Communicates with the SQLite database """
-# Adds an event to the SQLite database, attributes must be passed in
+# Adds an event to the SQLite database, attributes must be passed into this endpoint
 @app.post("/events", response_model=Event)
 def create_event(new_event: Event):
     connection = get_connection()
