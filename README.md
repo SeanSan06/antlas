@@ -1,6 +1,11 @@
 # Antlas
 Antlas is a web based application allowing users to create events. Users can choose what to name their event and display their name so others can identify who is hosting it. Furthermore, the time of the event can also be set. User can use the built in map to pinpoint the exact location they want their event to be.
 
+## Pictures of website
+![Example Image](/frontend/images/home.png)
+![Example Image](/frontend/images/map-demo.png)
+![Example Image](/frontend/images/about.png)
+
 ## How it's made
 Technology used: HTML, CSS, JavaScript, FastAPI, Python, SQLite, and OpenStreetMap API
 
